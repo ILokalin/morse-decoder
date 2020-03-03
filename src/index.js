@@ -36,21 +36,21 @@ const MORSE_TABLE = {
     '----.':  '9',
     '-----':  '0',
 },
-SPACE = '**********'
+SPACE = '**********',
+MORSE_DASH = '11',
+MORSE_DOT = '10',
+CHAR_REGEXP = /[01]{10}|[\*]{10}/g,
+POINT_REGEXP = /[01]{2}/g
 
 function decode(expr) {
-    let wordResult = '';
 
-    expr.match(/[01]{10}|[\*]{10}/g).forEach(char => {
-        
-        if (char === SPACE) {
-            wordResult += ' '
-        } else {
-            wordResult += MORSE_TABLE[char.match(/[01]{2}/g).map(point => point === '11' ? '-' : point === '10' ? '.' : '').join('')];
-        }
-    });
-
-    return wordResult;
+    return expr.match(CHAR_REGEXP).map(char => {
+        if (char !== SPACE) {
+            
+            return MORSE_TABLE[char.match(POINT_REGEXP).map(point => point === MORSE_DASH ? '-' : point === MORSE_DOT ? '.' : '').join('')];
+        } 
+        return ' '
+    }).join('');
 }
 
 module.exports = {
