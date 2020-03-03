@@ -1,4 +1,5 @@
 # Morse code decoder
+[![Build status](https://ci.appveyor.com/api/projects/status/evv8owp4wrvgiete?svg=true)](https://ci.appveyor.com/project/ILokalin/morse-decoder)
 
 ## Task
 
