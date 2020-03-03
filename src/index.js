@@ -35,10 +35,22 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
-};
+},
+SPACE = '**********'
 
 function decode(expr) {
-    // write your solution here
+    let wordResult = '';
+
+    expr.match(/[01]{10}|[\*]{10}/g).forEach(char => {
+        
+        if (char === SPACE) {
+            wordResult += ' '
+        } else {
+            wordResult += MORSE_TABLE[char.match(/[01]{2}/g).map(point => point === '11' ? '-' : point === '10' ? '.' : '').join('')];
+        }
+    });
+
+    return wordResult;
 }
 
 module.exports = {
